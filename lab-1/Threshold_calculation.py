@@ -9,7 +9,7 @@ def actual_NN(net):
     :param net: параметр сетевого/комбинированного входа
     :param retrun: значение реального выхода НС
     '''
-    if net > 0:
+    if net >= 0:
         return 1
     else:
         return 0

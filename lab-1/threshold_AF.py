@@ -29,7 +29,7 @@ if __name__ == '__main__':
                 X = bin_generation(4) # генерируем вектора для 4-х переменных
                 nu = 0.3 # норма обучения
                 E = 1 # необходимо для начала цикла прохода по эпохам
-                k = 0 # необходимо для начала отсчёта эпох
+                k = -1 # необходимо для начала отсчёта эпох
 
                 arrayE = list() # список всех суммарнах квадратичных ошибок
                 arrayK = list() # список всех эпох
@@ -37,24 +37,10 @@ if __name__ == '__main__':
 
                 file = open(outputFile, 'w')
 
-                # запишем данные для нулевой эпохи
-                for (x,f) in zip(X, F):
-                    # 1) считаем net
-                    n = net(W, x)
-
-                    # 2) считаем реальный выход
-                    y = actual_NN(n)
-                    Y.append(y)
-
-                E = totalError(Y, F)
-
-                write_Data(file, k, Y, W, E)
-
-                Y = list() # очистим список с реальными выходами НС для дальнейшей работы с ним
-
-
                 while E != 0:
                     k += 1
+
+                    prev_W = list(W)
 
                     for (x,f) in zip(X, F):
 
@@ -71,11 +57,10 @@ if __name__ == '__main__':
                         # 4) пересчитываем W
                         W = recount_W(W, x, d, nu)
 
-
                     # 5) посчитаем суммарную квадратичную ошибку
                     E = totalError(Y, F)
 
-                    write_Data(file, k, Y, W, E)
+                    write_Data(file, k, Y, prev_W, E)
 
                     Y = list()
 
