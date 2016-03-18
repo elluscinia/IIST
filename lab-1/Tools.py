@@ -2,6 +2,12 @@
 '''
 Модуль с инструментами, облегчающими работу
 '''
+def not_x(x):
+    return abs(1-x)
+
+def boolean_function(x1, x2, x3, x4):
+    return not_x(((not_x(x2) or x4) and x1) or (x1 and x3))
+
 
 def IntToByte(x):
     '''

@@ -2,6 +2,7 @@
 '''
 Модуль с необходимыми для вычисления параметров НС функциями
 '''
+from math import exp
 
 def actual_NN(net):
     '''
@@ -13,6 +14,9 @@ def actual_NN(net):
         return 1
     else:
         return 0
+
+def out(net):
+    return 1/(1+exp(-net))
 
 def net(W, X):
     '''
@@ -36,27 +40,33 @@ def delta(t, y):
     '''
     return t - y
 
-def delta_w(nu, delta, x):
+def delta_w(nu, delta, net, x, kind):
     '''
     Функция считает текущее delta w, для корректировки согласно дельта-правилу
     :param nu: норма обучения
     :param delta: ошибка
+    :param net: сетевой вход
     :param x: значение текущего х
     :param return: delta w
     '''
-    return nu * delta * x
+    if kind == 'logistics':
+        return nu * delta * out(net) * (1 - out(net)) * x
+    elif kind == 'threshold':
+        return nu * delta * x
 
-def recount_W(W, X, delta, nu):
+def recount_W(W, X, d, n, nu, kind):
     '''
     Функция корректирует вектор весовых коэффициентов согласно дельта-правилу
+    и подсчитывает реальный выход НС
+    :param F:
     :param W: вектор весовых коэффициентов
     :param X: текущий вектор x0 x1 x2 x3 x4
-    :param delta: дельта ошибка
     :param nu: норма обучения
     :param return: откорректированный вектор весовых коэффициентов
+                    и вектор реального выхода НС
     '''
-    for i, w in enumerate(W):
-        W[i] += delta_w(nu, delta, X[i])
+    for (i, w) in enumerate(W):
+            W[i] += delta_w(nu, d, n, X[i], kind)
     return W
 
 def totalError(Y, F):
