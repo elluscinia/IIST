@@ -33,7 +33,7 @@ def get_F(X):
     '''
     F = list()
     for x in X:
-        # x0 в расчёт не берётся. Оно необходимо лишь для правила Виндроу-Хоффа
+        # x0 в расчёт не берётся. Оно необходимо лишь для правила Видроу-Хоффа
         F.append(boolean_function(x[1], x[2], x[3], x[4]))
     return F
 
@@ -41,7 +41,7 @@ def nnm_BF(W, F, outputFile):
     '''
     Функция производит расчёт и построения нейросетевой модели БФ, используя пороговую и логистическую ФА
     :param W: начальные весовые коэффициенты
-    :param F:знаечния БФ
+    :param F: значения БФ
     :param outputFile: имя файла вывода
     :param return: none
     '''
@@ -64,7 +64,6 @@ def min_setVectors(W, F, outputFile):
 
     # Найдем минимальный набор обучающих векторов, используя логистическую ФА
     education_AF(W, F, outputFile + '_education_logistics', 'logistics')
-
 
 if __name__ == '__main__':
     if len(sys.argv) != 2:
