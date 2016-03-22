@@ -13,11 +13,11 @@ import itertools
 def education_AF(inputW, inputF, outputFile):
     X = bin_generation(4) # генерируем вектора для 4-х переменных
 
-    for i in xrange(2**4, 3, -1):
+    for i in xrange(2**4, 2, -1):
         # генерируем комбинации векторов различных длин
         combinations = list(itertools.combinations(zip(X, inputF), i))
         for combination in combinations:
-            W, F = inputW, inputF
+            W, F = list(inputW), list(inputF)
 
             nu = 0.3 # норма обучения
             E = 1 # необходимо для начала цикла прохода по эпохам
