@@ -30,5 +30,5 @@ def write_Data(file, k, Y, W, E):
     '''
     file.write('k = ' + str(k) + '\n')
     file.write('Y = (' + str(Y)[1:-1] + '),\n')
-    file.write('W = (' + str(W)[1:-1] + '), E = ' + str(E) + '\n')
+    file.write('W = (' + str([float(j) for j in ['%.3f' % i for i in W]])[1:-1] + '), E = ' + str(E) + '\n')
     file.write('\n\n')
