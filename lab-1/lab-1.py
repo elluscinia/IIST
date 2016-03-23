@@ -11,7 +11,7 @@
 '''
 import sys
 from AF import *
-from education import *
+from Education import *
 from Tools import boolean_function, bin_generation, IntToByte
 
 def initialize_components():
