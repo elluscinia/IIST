@@ -1,2 +1,6 @@
 # IIST
-intelligent information security technology - laboratory works
+_Intelligent Information Security Technology - laboratory works_
+
+## Лабораторная работа #1
+> Исследовать функционирование простейшей нейронной сети (НС) на базе нейрона с
+нелинейной функцией активации и ее обучение по правилу Видроу-Хоффа.
