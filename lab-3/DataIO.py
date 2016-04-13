@@ -10,6 +10,6 @@ def read_images(fileName):
     data = [line[:-1] for line in file] 
     image = list()
     for i in data:
-        string = list(i.split(' '))
+        string = list(i.split('\t'))
         image.append([int(s) for s in string])
     return image
