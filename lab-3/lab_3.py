@@ -1,4 +1,9 @@
 # -*- coding: utf-8 -*-
+'''
+Исследовать процедуры обучения и функционирования рекуррентных нейронных сетей
+(РНС) Хопфилда в качестве устройства автоассоциативной памяти.
+'''
+
 import sys
 from Calculation import *
 from DataIO import *
@@ -141,9 +146,8 @@ def handle_arguments(arguments):
     :param return: None
     '''
     images = list()
-    for argument in sys.argv:
-        if 'lab-3.py' not in argument:
-            print argument
+    for argument in arguments:
+        if 'lab_3.py' not in argument:
             images.append(read_images(argument))
     print 'введите паттерн:'
     inputVector = raw_input().split(' ')
@@ -163,4 +167,5 @@ if __name__ == '__main__':
     if len(sys.argv) < 2:
         print 'не задан файл образа'
     else:
+        # 1 1 1 1 1 -1 1 1 1 -1 -1 -1 1 -1 -1 -1 -1 -1 1 -1 1 1 1 1 1
         handle_arguments(sys.argv)
