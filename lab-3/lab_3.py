@@ -11,7 +11,7 @@ from DataIO import *
 def count_w(image):
     '''
     Вычисляется матрица вида (X^T)*X
-    :param image: образ 
+    :param image: образ
     :param return: матрица
     '''
     w = list()
@@ -149,23 +149,34 @@ def handle_arguments(arguments):
     for argument in arguments:
         if 'lab_3.py' not in argument:
             images.append(read_images(argument))
-    print 'введите паттерн:'
-    inputVector = raw_input().split(' ')
-    corruption = [int(i) for i in inputVector]
-    result = correction(images, corruption)
+    print u'введите паттерн:'
+    inputVector = raw_input()
+    if inputVector[0] != str(1) and inputVector[0] != str(-1):
+        try:
+            f = open(inputVector)
+            data = [line[:-1] for line in f]
+            f.close()
+            corruption = [int(i) for i in data[0].split(' ')]
+            result = correction(images, corruption)
+        except IOError:
+            print u'такого файла нет'
+            result = 'образ не распознан'
+    else:
+        corruption = [int(i) for i in inputVector.split(' ')]
+        result = correction(images, corruption)
     if result != 'образ не распознан':
-        print 'распознан следующий образ:'
+        print u'распознан следующий образ:'
         for i in result:
             string = ''
             for j in i:
                 string += str(j) + '\t'
             print string
     else:
-        print 'образ не распознан'
+        print u'образ не распознан'
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:
-        print 'не задан файл образа'
+        print u'не задан файл образа'
     else:
         # 1 1 1 1 1 -1 1 1 1 -1 -1 -1 1 -1 -1 -1 -1 -1 1 -1 1 1 1 1 1
         handle_arguments(sys.argv)

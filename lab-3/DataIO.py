@@ -6,8 +6,9 @@ def read_images(fileName):
     :param fileName: имя файла
     :param return: прочитанный образ
     '''
-    file = open(fileName)
-    data = [line[:-1] for line in file] 
+    f = open(fileName)
+    data = [line[:-1] for line in f]
+    f.close()
     image = list()
     for i in data:
         string = list(i.split('\t'))
