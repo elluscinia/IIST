@@ -149,8 +149,8 @@ def handle_arguments(arguments):
     for argument in arguments:
         if 'lab_3.py' not in argument:
             images.append(read_images(argument))
-    print u'введите паттерн:'
-    inputVector = raw_input()
+    print u' введите паттерн:'
+    inputVector = raw_input('\t')
     if inputVector[0] != str(1) and inputVector[0] != str(-1):
         try:
             f = open(inputVector)
@@ -159,20 +159,38 @@ def handle_arguments(arguments):
             corruption = [int(i) for i in data[0].split(' ')]
             result = correction(images, corruption)
         except IOError:
-            print u'такого файла нет'
+            print u'\tтакого файла нет'
             result = 'образ не распознан'
     else:
         corruption = [int(i) for i in inputVector.split(' ')]
         result = correction(images, corruption)
     if result != 'образ не распознан':
-        print u'распознан следующий образ:'
-        for i in result:
-            string = ''
-            for j in i:
-                string += str(j) + '\t'
+        if 'linux' in sys.platform:
+            corrected_vector = get_X(result)
+            output_vector = '\t'
+            for i in xrange(0, len(corruption)):
+                if corruption[i] != corrected_vector[i]:
+                    output_vector += '\033[93m' + str(corruption[i]) + '\033[0m' + ' '
+                else:
+                    output_vector += str(corruption[i]) + ' '
+            print output_vector
+        print u'\n распознан следующий образ:'
+        corruption_image = get_image(corruption, len(result[0]))
+        for index_i,i in enumerate(result):
+            string = '\t'
+            for index_j,j in enumerate(i):
+                if 'linux' in sys.platform:
+                    if j != corruption_image[index_i][index_j]:
+                        string += '\033[93m' + str(j) + '\033[0m' +'\t'
+                    elif j == 1:
+                        string += '\033[94m' + str(j) + '\033[0m' +'\t'
+                    else:
+                        string += str(j) + '\t'
+                else:
+                    string += str(j) + '\t'
             print string
     else:
-        print u'образ не распознан'
+        print u'\tобраз не распознан'
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:
