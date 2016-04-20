@@ -52,8 +52,9 @@ def find_thresholds(image, images):
     array_coeff.append(float(coefficient)*100)
     array_percent.append(percent)
 
-    while float(percent) != float(0):
+    while float(percent) != float(0) and coefficient < 0.2:
         coefficient += 0.05
+        print coefficient
         percent = find_percent(image, images, coefficient)
         array_coeff.append(float(coefficient)*100)
         array_percent.append(percent)
