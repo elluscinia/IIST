@@ -26,10 +26,11 @@ def find_percent(image, images, coefficient):
     for i in xrange(0, len(test_letter)):
         indexes.append(i)
 
-    permutations = itertools.permutations(indexes, coefficient*len(test_letter))
+    permutations = itertools.permutations(indexes, round(coefficient*len(test_letter)))
     correctly_guessed = 0
     count = 0
     for permutation in permutations:
+        print permutation
         count += 1
         test_letter = get_X(image)
         for i in permutation:
@@ -45,16 +46,15 @@ def find_thresholds(image, images):
     array_coeff = list()
     array_percent = list()
 
-    coefficient = 0.1
+    coefficient = 0.08
 
     percent = find_percent(image, images, coefficient)
 
     array_coeff.append(float(coefficient)*100)
     array_percent.append(percent)
-
-    while float(percent) != float(0) and coefficient < 0.2:
+    coefficient = 0.05
+    while float(percent) != float(0):
         coefficient += 0.05
-        print coefficient
         percent = find_percent(image, images, coefficient)
         array_coeff.append(float(coefficient)*100)
         array_percent.append(percent)
