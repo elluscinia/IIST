@@ -152,18 +152,5 @@ class Clusterization():
 if __name__ == '__main__':
     window = Clusterization()
     window.run()
-    # A = [143, 213]
-    # B = [180, 220]
-    # dots = [[143, 213], [180, 220], [183, 249], [271, 253], [226, 253], [315, 275], [266, 297]]
-    # # dots = []
-    # # for i in xrange(0, 20):
-    # #     dots.append([randint(100, 740), randint(200, 740)])
-
-
-
-    # center_1 = [159, 238]
-    # center_2 = [270, 278]
-
-    # print kohonen(dots, [center_1, center_2], 'Manhattan')
 
     
