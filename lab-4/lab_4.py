@@ -134,9 +134,9 @@ class Clusterization():
         Tk().withdraw()
         filename = askopenfilename()
         self.centers += list(read_file(filename))
-        for dot in self.dots:
-            x = dot[0]
-            y = dot[1]
+        for center in self.centers:
+            x = center[0]
+            y = center[1]
             self.drawing_area.create_oval(x, y, x + 7, y + 7, width=1, fill=self.colors[1], dash=(4, 4))
 
 
